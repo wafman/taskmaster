@@ -27,5 +27,5 @@
       - ```localhost:8080/tasks/{id}/state```
 
 ## Deployed
-- www.willDeployWhenIHaveTimeAndThisLabIsComplete.com
+- http://taskmaster-dev-2.us-west-2.elasticbeanstalk.com/
    
