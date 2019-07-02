@@ -1,9 +1,11 @@
 package com.wafman.taskmaster.taskmaster;
 
 import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.AWSCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import org.socialsignin.spring.data.dynamodb.repository.config.EnableDynamoDBRepositories;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -22,16 +24,31 @@ public class DynamoDBConfig {
     @Value("${amazon.aws.secretkey}")
     private String amazonAWSSecretKey;
 
-    @Bean
-    public AmazonDynamoDB amazonDynamoDB() {
-        AmazonDynamoDB amazonDynamoDB
-                = new AmazonDynamoDBClient(amazonAWSCredentials());
 
-        if (!StringUtils.isEmpty(amazonDynamoDBEndpoint)) {
-            amazonDynamoDB.setEndpoint(amazonDynamoDBEndpoint);
-        }
+    @Bean
+    public AmazonDynamoDB amazonDynamoDB(){
+        AmazonDynamoDB amazonDynamoDB =
+                AmazonDynamoDBClientBuilder.standard()
+                        .withCredentials(credentialsProvider())
+                        .withRegion("us-west-2")
+                        .build();
 
         return amazonDynamoDB;
+    }
+
+
+    public AWSCredentialsProvider credentialsProvider() {
+        return new AWSCredentialsProvider() {
+            @Override
+            public AWSCredentials getCredentials() {
+                return amazonAWSCredentials();
+            }
+
+            @Override
+            public void refresh() {
+
+            }
+        };
     }
 
     @Bean
