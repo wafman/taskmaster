@@ -6,6 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.Optional;
 
 @EnableScan
-public interface TaskRespository extends CrudRepository<Task, Long> {
+public interface TaskRespository extends CrudRepository<Task, String> {
     Optional<Task> findById(String id);
 }
