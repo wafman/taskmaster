@@ -45,7 +45,7 @@ public class TaskTest {
 
         tableRequest.setProvisionedThroughput(new ProvisionedThroughput(1L, 1L));
 
-        dynamoDBMapper.batchDelete((List<Task>)taskRespository.findAll());
+//        dynamoDBMapper.batchDelete((List<Task>)taskRespository.findAll());
     }
 
     @Test
