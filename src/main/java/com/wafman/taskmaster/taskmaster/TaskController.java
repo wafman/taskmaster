@@ -16,11 +16,14 @@ public class TaskController {
         return "THIS WORKS";
     }
 
+    //consider making an html file to handle all of this
     @GetMapping("/tasks")
     public Iterable<Task> getTasks(){
         return taskRespository.findAll();
     }
 
+//use postman key value pairs key == title, value == what you call it
+    // /tasks/?title=create new Tasks&description=Makea list of all the things we need to do
     @PostMapping("/tasks")
     public RedirectView createTasks(@RequestParam String title, @RequestParam String description, @RequestParam String status){
         Task task = new Task(title, description, status);
@@ -28,6 +31,7 @@ public class TaskController {
         return new RedirectView("/tasks");
     }
 
+    //if else checks to change status
 //    @PutMapping("/tasks/{id}/state")
 //    public String updateTasksState(){
 //
