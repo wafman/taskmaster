@@ -64,4 +64,12 @@ public class Task {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public String getAssignee() {
+        return assignee;
+    }
+
+    public void setAssignee(String assignee) {
+        this.assignee = assignee;
+    }
 }
