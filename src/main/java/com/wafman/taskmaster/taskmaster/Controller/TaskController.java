@@ -34,8 +34,6 @@ public class TaskController {
     }
 
     //post requests
-
-
     @PostMapping("/tasks")
     public @ResponseBody Task createTasks(@ModelAttribute Task task){
         if(task.getAssignee() != null){
