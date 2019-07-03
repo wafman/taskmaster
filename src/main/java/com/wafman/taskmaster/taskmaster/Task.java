@@ -13,13 +13,15 @@ public class Task {
     private UUID id;
     private String title;
     private String description;
+    private String assignee;
     private String status;
 
     //constructors
     public Task(){}
-    public Task(String title, String description, String status){
+    public Task(String title, String description, String assignee,  String status){
         this.title = title;
         this.description = description;
+        this.assignee = assignee;
         this.status = status;
     }
 
