@@ -62,4 +62,12 @@ public class TaskController {
         taskRespository.save(task);
     }
 
+    @PutMapping("/tasks/{id}/assign/{assignee}")
+    public void updateSomething(@PathVariable UUID id, @PathVariable String assignee){
+        Task task = taskRespository.findById(id).get();
+        task.setAssignee(assignee);
+        task.setStatus("Assigned");
+        taskRespository.save(task);
+    }
+
 }
