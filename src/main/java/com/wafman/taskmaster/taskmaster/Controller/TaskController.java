@@ -34,11 +34,17 @@ public class TaskController {
     }
 
     //post requests
+
+
     @PostMapping("/tasks")
-    public void createTasks(@RequestParam String title, @RequestParam String description, @RequestParam String assignee, @RequestParam String status){
-        status = status.substring(0, 1).toUpperCase() + status.substring(1);
-        Task task = new Task(title, description, assignee, status);
+    public @ResponseBody Task createTasks(@ModelAttribute Task task){
+        if(task.getAssignee() != null){
+            task.setStatus("Assigned");
+        } else {
+            task.setStatus("Available");
+        }
         taskRespository.save(task);
+        return task;
     }
 
     //put requests
