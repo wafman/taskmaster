@@ -18,11 +18,18 @@ public class Task {
 
     //constructors
     public Task(){}
-    public Task(String title, String description, String assignee,  String status){
+
+    public Task(String title, String description){
+        this.title = title;
+        this.description = description;
+        this.status = "Available";
+    }
+
+    public Task(String title, String description, String assignee){
         this.title = title;
         this.description = description;
         this.assignee = assignee;
-        this.status = status;
+        this.status = "Assigned";
     }
 
 
