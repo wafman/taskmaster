@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -15,17 +16,24 @@ public class TaskController {
     @Autowired
     TaskRespository taskRespository;
 
+
+    //get requests
     @GetMapping("/")
     public String getHome(){
         return "THIS WORKS";
     }
 
-    //consider making an html file to handle all of this
     @GetMapping("/tasks")
     public Iterable<Task> getTasks(){
         return taskRespository.findAll();
     }
 
+    @GetMapping("/users/{assignee}/tasks")
+    public List<Task> getAssigneeTasks(@PathVariable String assignee){
+        return taskRespository.findByAssignee(assignee);
+    }
+
+    //post requests
     @PostMapping("/tasks")
     public void createTasks(@RequestParam String title, @RequestParam String description, @RequestParam String assignee, @RequestParam String status){
         status = status.substring(0, 1).toUpperCase() + status.substring(1);
@@ -33,6 +41,7 @@ public class TaskController {
         taskRespository.save(task);
     }
 
+    //put requests
     @PutMapping("/tasks/{id}/state")
     public void updateTasksState(@PathVariable UUID id){
         Task task = taskRespository.findById(id).get();
