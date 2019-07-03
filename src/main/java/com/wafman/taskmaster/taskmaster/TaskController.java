@@ -1,9 +1,11 @@
 package com.wafman.taskmaster.taskmaster;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.view.RedirectView;
+
+
+import java.util.UUID;
 
 @RestController
 public class TaskController {
@@ -22,19 +24,25 @@ public class TaskController {
         return taskRespository.findAll();
     }
 
-//use postman key value pairs key == title, value == what you call it
-    // /tasks/?title=create new Tasks&description=Makea list of all the things we need to do
     @PostMapping("/tasks")
-    public RedirectView createTasks(@RequestParam String title, @RequestParam String description, @RequestParam String status){
+    public void createTasks(@RequestParam String title, @RequestParam String description, @RequestParam String status){
+        status = status.substring(0, 1).toUpperCase() + status.substring(1);
         Task task = new Task(title, description, status);
         taskRespository.save(task);
-        return new RedirectView("/tasks");
     }
 
-    //if else checks to change status
-//    @PutMapping("/tasks/{id}/state")
-//    public String updateTasksState(){
-//
-//    }
+    @PutMapping("/tasks/{id}/state")
+    public void updateTasksState(@PathVariable UUID id){
+        Task task = taskRespository.findById(id).get();
+        String status = task.getStatus();
+        if(status.equals("Available")){
+            task.setStatus("Assigned");
+        } else if(status.equals("Assigned")){
+            task.setStatus("Accepted");
+        } else if(status.equals("Accepted")){
+            task.setStatus("Finished");
+        }
+        taskRespository.save(task);
+    }
 
 }
