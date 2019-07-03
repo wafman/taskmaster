@@ -64,6 +64,7 @@ public class Task {
         this.description = description;
     }
 
+    @DynamoDBAttribute
     public String getStatus() {
         return status;
     }
@@ -72,6 +73,7 @@ public class Task {
         this.status = status;
     }
 
+    @DynamoDBAttribute
     public String getAssignee() {
         return assignee;
     }

@@ -18,6 +18,8 @@
   - should show the tasks that are assigned to that assignee
 - ```@PutMapping("/tasks/{id}/assign/{assignee}) ```
   - can assign tasks to an assignee
+- ```@DeleteMapping("/tasks/{id}")```
+  - can delete a task
 
 
 ## Directions
@@ -35,6 +37,8 @@
       - ```localhost:5000/tasks/{id}/state```
       - ```localhost:5000/users/{assignee}/tasks```
       - ```localhost:5000/tasks/{id}/assign/{assignee}```
+      - ```localhost:5000/tasks/{id}```
+        - delete route
 
 ## Deployed
 - http://taskmaster-dev-2.us-west-2.elasticbeanstalk.com/

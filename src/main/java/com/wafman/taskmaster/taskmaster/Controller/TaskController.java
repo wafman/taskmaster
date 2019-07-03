@@ -68,4 +68,7 @@ public class TaskController {
         taskRespository.save(task);
     }
 
+    @DeleteMapping("/tasks/{id}")
+    public void deleteTask(@PathVariable UUID id){ taskRespository.deleteById(id); }
+
 }
