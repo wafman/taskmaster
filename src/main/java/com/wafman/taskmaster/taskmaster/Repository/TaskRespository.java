@@ -1,5 +1,6 @@
-package com.wafman.taskmaster.taskmaster;
+package com.wafman.taskmaster.taskmaster.Repository;
 
+import com.wafman.taskmaster.taskmaster.Model.Task;
 import org.socialsignin.spring.data.dynamodb.repository.EnableScan;
 import org.springframework.data.repository.CrudRepository;
 

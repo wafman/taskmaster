@@ -1,5 +1,7 @@
-package com.wafman.taskmaster.taskmaster;
+package com.wafman.taskmaster.taskmaster.Controller;
 
+import com.wafman.taskmaster.taskmaster.Model.Task;
+import com.wafman.taskmaster.taskmaster.Repository.TaskRespository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
@@ -25,9 +27,9 @@ public class TaskController {
     }
 
     @PostMapping("/tasks")
-    public void createTasks(@RequestParam String title, @RequestParam String description, @RequestParam String status){
+    public void createTasks(@RequestParam String title, @RequestParam String description, @RequestParam String assignee, @RequestParam String status){
         status = status.substring(0, 1).toUpperCase() + status.substring(1);
-        Task task = new Task(title, description, status);
+        Task task = new Task(title, description, assignee, status);
         taskRespository.save(task);
     }
 
