@@ -4,6 +4,8 @@ import com.wafman.taskmaster.taskmaster.Model.Task;
 import com.wafman.taskmaster.taskmaster.Repository.TaskRespository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -36,14 +38,14 @@ public class TaskController {
 
     //post requests
     @PostMapping("/tasks")
-    public @ResponseBody Task createTasks(@ModelAttribute Task task){
+    public ResponseEntity createTasks(@RequestBody Task task){
         if(task.getAssignee() != null){
             task.setStatus("Assigned");
         } else {
             task.setStatus("Available");
         }
         taskRespository.save(task);
-        return task;
+        return new ResponseEntity(task, HttpStatus.OK);
     }
 
     //put requests
