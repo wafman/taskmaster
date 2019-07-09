@@ -48,7 +48,7 @@ public class TaskController {
 
     //post requests
     @PostMapping("/tasks")
-    public ResponseEntity createTasks(@RequestBody Task task){
+    public ResponseEntity createTasks(@RequestBody Task task, @RequestPart MultipartFile file){
         if(task.getAssignee() != null){
             task.setStatus("Assigned");
         } else {
@@ -59,7 +59,7 @@ public class TaskController {
     }
 
     @PostMapping("/tasks/{id}/images")
-    public Task createImage(@RequestParam UUID id, @RequestPart MultipartFile file){
+    public Task createImage(@PathVariable UUID id, @RequestPart MultipartFile file){
         Task task = taskRespository.findById(id).get();
         String pic = this.s3Client.uploadFile(file);
         task.setPic(pic);
