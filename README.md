@@ -20,6 +20,8 @@
   - can assign tasks to an assignee
 - ```@DeleteMapping("/tasks/{id}")```
   - can delete a task
+-  ```PostMapping("/tasks/{id}/images")
+  - can update a task with an image
 
 
 ## Directions
@@ -38,6 +40,7 @@
       - ```localhost:5000/users/{assignee}/tasks```
       - ```localhost:5000/tasks/{id}/assign/{assignee}```
       - ```localhost:5000/tasks/{id}```
+      - ```localhost:5000/tasks/{id}/images```
         - delete route
 
 ## Deployed
