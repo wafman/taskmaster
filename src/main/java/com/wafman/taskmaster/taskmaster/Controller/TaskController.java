@@ -1,12 +1,15 @@
 package com.wafman.taskmaster.taskmaster.Controller;
 
 import com.wafman.taskmaster.taskmaster.Model.Task;
+import com.wafman.taskmaster.taskmaster.Repository.S3Client;
 import com.wafman.taskmaster.taskmaster.Repository.TaskRespository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 
 
 import java.util.List;
@@ -15,6 +18,13 @@ import java.util.UUID;
 @CrossOrigin
 @RestController
 public class TaskController {
+
+    private S3Client s3Client;
+
+    @Autowired
+    TaskController(S3Client s3Client){
+        this.s3Client = s3Client;
+    }
 
     @Autowired
     TaskRespository taskRespository;
@@ -46,6 +56,16 @@ public class TaskController {
         }
         taskRespository.save(task);
         return new ResponseEntity(task, HttpStatus.OK);
+    }
+
+    @PostMapping("/tasks/{id}/images")
+    public Task createImage(@RequestParam UUID id, @RequestPart MultipartFile file){
+        Task task = taskRespository.findById(id).get();
+        String pic = this.s3Client.uploadFile(file);
+        task.setPic(pic);
+        System.out.println(pic);
+        taskRespository.save(task);
+        return task;
     }
 
     //put requests
