@@ -15,21 +15,28 @@ public class Task {
     private String description;
     private String assignee;
     private String status;
+    private String pic;
 
     //constructors
     public Task(){}
 
-    public Task(String title, String description){
+    public Task(String pic){
+        this.pic = pic;
+    }
+
+    public Task(String title, String description, String pic){
         this.title = title;
         this.description = description;
         this.status = "Available";
+        this.pic = pic;
     }
 
-    public Task(String title, String description, String assignee){
+    public Task(String title, String description, String assignee, String pic){
         this.title = title;
         this.description = description;
         this.assignee = assignee;
         this.status = "Assigned";
+        this.pic = pic;
     }
 
 
@@ -50,7 +57,7 @@ public class Task {
         return title;
     }
 
-    @DynamoDBAttribute
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -80,5 +87,14 @@ public class Task {
 
     public void setAssignee(String assignee) {
         this.assignee = assignee;
+    }
+
+    @DynamoDBAttribute
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic;
     }
 }
