@@ -48,7 +48,7 @@ public class TaskController {
 
     //post requests
     @PostMapping("/tasks")
-    public ResponseEntity createTasks(@RequestBody Task task, @RequestPart MultipartFile file){
+    public ResponseEntity createTasks(@RequestBody Task task, @RequestPart(value= "file") MultipartFile file){
         if(task.getAssignee() != null){
             task.setStatus("Assigned");
         } else {
