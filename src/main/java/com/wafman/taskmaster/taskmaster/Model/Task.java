@@ -16,6 +16,7 @@ public class Task {
     private String assignee;
     private String status;
     private String pic;
+    private String picResize;
 
     //constructors
     public Task(){}
@@ -24,19 +25,21 @@ public class Task {
         this.pic = pic;
     }
 
-    public Task(String title, String description, String pic){
+    public Task(String title, String description, String pic, String picResize){
         this.title = title;
         this.description = description;
         this.status = "Available";
         this.pic = pic;
+        this.picResize = picResize;
     }
 
-    public Task(String title, String description, String assignee, String pic){
+    public Task(String title, String description, String assignee, String pic, String picResize){
         this.title = title;
         this.description = description;
         this.assignee = assignee;
         this.status = "Assigned";
         this.pic = pic;
+        this.picResize = picResize;
     }
 
 
@@ -96,5 +99,14 @@ public class Task {
 
     public void setPic(String pic) {
         this.pic = pic;
+    }
+
+    @DynamoDBAttribute
+    public String getPicResize() {
+        return picResize;
+    }
+
+    public void setPicResize(String picResize) {
+        this.picResize = picResize;
     }
 }
