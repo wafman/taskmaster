@@ -6,6 +6,10 @@
 - tasks can be assigned
 - tasks status can be updated
 - tasks for assignees can be displayed
+- to test resizied image
+ - upload new image
+ - the lambda will generate a new image resized and display it on the front end.
+ - enjoy the resized thumbnail image.
 
 ## API
 - ```@GetMapping("/tasks")```
