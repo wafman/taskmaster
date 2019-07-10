@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 
-
 import java.util.List;
 import java.util.UUID;
 
@@ -64,6 +63,9 @@ public class TaskController {
         Task task = taskRespository.findById(id).get();
         String pic = this.s3Client.uploadFile(file);
         task.setPic(pic);
+        String[] blah = pic.split("/");
+        String tb = blah[blah.length -1];
+        task.setPicResize("https://taskmaster-react-resized.s3-us-west-2.amazonaws.com/resized-" + tb);
         System.out.println(pic);
         taskRespository.save(task);
         return task;
