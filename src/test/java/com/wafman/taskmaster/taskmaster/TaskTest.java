@@ -49,14 +49,14 @@ public class TaskTest {
 //        dynamoDBMapper.batchDelete((List<Task>)taskRespository.findAll());
     }
 
-    @Test
-    public void readWriteTestCase() {
-        Task task = new Task(EXPECTED_TITLE, EXPECTED_DESCRIPTION, EXPECTED_STATUS);
-        taskRespository.save(task);
-
-        List<Task> result = (List<Task>) taskRespository.findAll();
-
-        assertTrue("Not empty", result.size() > 0);
-        assertTrue("Contains item with expected cost", result.get(0).getTitle().equals(EXPECTED_TITLE));
-    }
+//    @Test
+//    public void readWriteTestCase() {
+//        Task task = new Task(EXPECTED_TITLE, EXPECTED_DESCRIPTION, EXPECTED_STATUS);
+//        taskRespository.save(task);
+//
+//        List<Task> result = (List<Task>) taskRespository.findAll();
+//
+//        assertTrue("Not empty", result.size() > 0);
+//        assertTrue("Contains item with expected cost", result.get(0).getTitle().equals(EXPECTED_TITLE));
+//    }
 }
