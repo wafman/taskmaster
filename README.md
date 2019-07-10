@@ -50,4 +50,7 @@
 ## Deployed
 - http://taskmaster-dev-2.us-west-2.elasticbeanstalk.com/
   - to test routes replace localhost:5000 with the above link
+
+## Resources
+- resizing js file - aws example with changes to work for this project
    
