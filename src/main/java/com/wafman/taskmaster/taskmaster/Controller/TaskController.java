@@ -21,11 +21,7 @@ public class TaskController {
 
     @Autowired
     private S3Client s3Client;
-
-//    @Autowired
-//    TaskController(S3Client s3Client){
-//        this.s3Client = s3Client;
-//    }
+    
 
     @Autowired
     TaskRespository taskRespository;
@@ -47,17 +43,6 @@ public class TaskController {
         return taskRespository.findByAssignee(assignee);
     }
 
-    //post requests
-//    @PostMapping("/tasks")
-//    public ResponseEntity createTasks(@RequestBody Task task, @RequestPart(value= "file") MultipartFile file){
-//        if(task.getAssignee() != null){
-//            task.setStatus("Assigned");
-//        } else {
-//            task.setStatus("Available");
-//        }
-//        taskRespository.save(task);
-//        return new ResponseEntity(task, HttpStatus.OK);
-//    }
 
     @PostMapping("/tasks")
     public RedirectView createTask(@RequestParam String title, @RequestParam String description, @RequestParam String assignee,
@@ -72,7 +57,10 @@ public class TaskController {
         String tb = blah[blah.length -1];
         task.setPicResize("https://taskmaster-react-resized.s3-us-west-2.amazonaws.com/resized-" + tb);
         taskRespository.save(task);
-        return new RedirectView(("http://localhost:3000"));
+        //for testing
+//        return new RedirectView(("http://localhost:3000"));
+        return new RedirectView(("http://taskmaster-react.s3-website-us-west-2.amazonaws.com/"));
+
     }
 
     @PostMapping("/tasks/{id}/images")
