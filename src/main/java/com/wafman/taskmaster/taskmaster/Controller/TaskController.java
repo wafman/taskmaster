@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.view.RedirectView;
 
 
 import java.util.List;
@@ -47,15 +48,31 @@ public class TaskController {
     }
 
     //post requests
+//    @PostMapping("/tasks")
+//    public ResponseEntity createTasks(@RequestBody Task task, @RequestPart(value= "file") MultipartFile file){
+//        if(task.getAssignee() != null){
+//            task.setStatus("Assigned");
+//        } else {
+//            task.setStatus("Available");
+//        }
+//        taskRespository.save(task);
+//        return new ResponseEntity(task, HttpStatus.OK);
+//    }
+
     @PostMapping("/tasks")
-    public ResponseEntity createTasks(@RequestBody Task task, @RequestPart(value= "file") MultipartFile file){
-        if(task.getAssignee() != null){
-            task.setStatus("Assigned");
-        } else {
-            task.setStatus("Available");
-        }
+    public RedirectView createTask(@RequestParam String title, @RequestParam String description, @RequestParam String assignee,
+                                   @RequestPart(value = "file") MultipartFile file ){
+        Task task = new Task();
+        String pic = this.s3Client.uploadFile(file);
+        task.setTitle(title);
+        task.setDescription(description);
+        task.setAssignee(assignee);
+        task.setPic(pic);
+        String[] blah = pic.split("/");
+        String tb = blah[blah.length -1];
+        task.setPicResize("https://taskmaster-react-resized.s3-us-west-2.amazonaws.com/resized-" + tb);
         taskRespository.save(task);
-        return new ResponseEntity(task, HttpStatus.OK);
+        return new RedirectView(("http://localhost:3000"));
     }
 
     @PostMapping("/tasks/{id}/images")
