@@ -60,4 +60,4 @@
 [Image 1](./src/main/resources/static/images/image1.png)
 [Image 2](./src/main/resources/static/images/image2.png)
 [Image 3](./src/main/resources/static/images/image3.png)
-   
+
