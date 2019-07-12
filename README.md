@@ -57,7 +57,7 @@
 
 ## Lambda Warmer
 
-- [Image 1](./src/main/resources/static/images/Screen Shot 2019-07-12 at 9.18.04 AM.png)
-- [Image 2](./src/main/resources/static/images/Screen Shot 2019-07-12 at 9.18.21 AM.png)
-- [Image 3](./src/main/resources/static/images/Screen Shot 2019-07-12 at 9.34.14 AM.png)
-   
+[Image 1](./src/main/resources/static/images/image1.png)
+[Image 2](./src/main/resources/static/images/image2.png)
+[Image 3](./src/main/resources/static/images/image3.png)
+
